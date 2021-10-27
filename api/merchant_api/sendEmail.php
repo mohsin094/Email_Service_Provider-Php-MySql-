@@ -30,6 +30,8 @@
 
                 //get merchant email id from token and save into variable
                 $from = $verify_token['data']->email;
+                
+                $credit = $verify_token['data']->credit;
 
                 //call the sendEmail unction in Email class and pass parameters
                 $result = $emailObj->sendEmail($from,$to,$cc,$bcc,$subject,$body);
@@ -43,6 +45,10 @@
                     $query="INSERT into request (requester_id,email_from,email_to,cc,bcc,email_subject,body) 
                     values('$merchant_id','$from','$to','$cc','$bcc','$subject','$body')";
                     $conn->query($query);  
+                  
+                    $credit =$credit - 0.0489; 
+                         $query1=" UPDATE merchant SET credit ='$credit' WHERE merchant_id = $merchant_id";
+                         $result = $conn->query($query1);
                     $res->set_response(null,'Email send successfully',400);
                     $res->respond_api();
                 }

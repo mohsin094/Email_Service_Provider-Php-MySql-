@@ -17,7 +17,7 @@
     //merchant sign function
     public function signIn($email,$password,$db_conn){
         //Query
-        $query = "SELECT merchant_id,name,email FROM merchant WHERE email='$email' AND password='$password'";
+        $query = "SELECT * FROM merchant WHERE email='$email' AND password='$password'";
         $result = $db_conn->query($query);
 
         if($result->num_rows > 0){    

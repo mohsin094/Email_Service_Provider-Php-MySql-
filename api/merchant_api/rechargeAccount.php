@@ -25,7 +25,7 @@
                 $mail = $verify_token['data']->email;
 
                 $recharge = new Recharge();
-                $recharge->rechargeAccount($card_num,$exp_month,$exp_year,$cvc,$name,$mail,$merchant_id);
+                $recharge->rechargeAccount($card_num,$exp_month,$exp_year,$cvc,$name,$mail,$merchant_id,$merchant_id);
             }else{
                 $res->set_response(null,$verify_token['data'],404);
                 $res->respond_api();

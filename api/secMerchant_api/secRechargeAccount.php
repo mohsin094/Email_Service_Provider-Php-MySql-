@@ -31,7 +31,7 @@
                     $recharge->rechargeAccount($card_num,$exp_month,$exp_year,$cvc,$name,$mail,$sec_merchant_id,$merchant_id);
                 }
                 else{
-                    $res->set_response(NULL,"Sorry you don't have permission to send email.",404);
+                    $res->set_response(NULL,"Sorry you don't have permission to pay.",404);
                     $res->respond_api();
                 }
             }else{

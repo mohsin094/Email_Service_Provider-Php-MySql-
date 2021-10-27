@@ -38,8 +38,6 @@ public function sendEmail($from,$to,$cc,$bcc,$subject,$body){
     ]
   ];
   $response = $mj->post(Resources::$Email, ['body' => $body]);
-
-  var_dump($response->success());
   return $response->success();
 }
 

@@ -27,6 +27,8 @@
                  //get merchant email id from token and save into variable
                   $sec_merchant_id = $verify_token['data']->sec_merchant_id;
 
+                  $merchant_id = $verify_token['data']->merchant_id;
+
                   //save email_send_role value
                   $emailSendRole = $verify_token['data']->email_send_role;
                   
@@ -45,6 +47,15 @@
                         $query="INSERT into request (requester_id,email_from,email_to,cc,bcc,email_subject,body) 
                         values('$sec_merchant_id','$from','$to','$cc','$bcc','$subject','$body')";
                         $conn->query($query);  
+
+                        $query1="SELECT credit from merchant WHERE merchant_id = $merchant_id";
+                        $result = $conn->query($query1);
+                        $row=$result->fetch_assoc();
+                        $credit = $row['credit'];
+                        $credit =$credit - 0.0489; 
+                        $query2=" UPDATE merchant SET credit ='$credit' WHERE merchant_id = $merchant_id";
+                        $result = $conn->query($query2);
+
                         $res->set_response(null,'Email send successfully',400);
                         $res->respond_api();
                     }

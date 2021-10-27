@@ -8,7 +8,7 @@ require_once '../../api_response/response.php';
   
   class Recharge{
 
-        public function rechargeAccount($card_num,$exp_month,$exp_year,$cvc,$name,$email,$payer_id,$pay_for){
+        public function rechargeAccount($card_num,$exp_month,$exp_year,$cvc,$name,$email,$payer_id,$payment_for){
             $stripe = new \Stripe\StripeClient(
                 'sk_test_51Jp5pRKD7233Jqbe7viIRqj4zhzDOwkdBS15t2BAEMI4xal1hIDaoBvekbgzRqd1XgRSeI31cYQcnwrTww5AnidW00UweOa43g'
               );
@@ -41,11 +41,11 @@ require_once '../../api_response/response.php';
                     // get database connection
                     $conn = $database->get_Connection();
                     $transationID=$transation->id;
-                    $query1=" UPDATE merchant SET credit ='50' WHERE merchant_id = $payer_id";
+                    $query1=" UPDATE merchant SET credit ='50' WHERE merchant_id = $payment_for";
                     $result = $conn->query($query1);
                   if($result){
-                    $query="INSERT into payments (payment_id,	payer_id,payer_name,payment_amount) 
-                    values('$transationID','$payer_id','$name','50')";
+                    $query="INSERT into payments (payment_id,payer_id,payment_for,payer_name,payment_amount) 
+                    values('$transationID','$payer_id','$payment_for','$name','50')";
                      $conn->query($query);  
                     $res->set_response(null,'Payment done successfully!',200);
                     $res->respond_api();

@@ -36,9 +36,6 @@
                 $data=array();
                 while($row=$query->fetch_assoc()) 
                 {
-                    // $data['Sec_Merchant_Id']=$row['sec_merchant_id'];
-                    // $data['name']=$row['name'];
-                    // $data['join_date']=$row['join_date']; 
                     array_push($data,"Send to:",$row['email_to'],"Cc:",$row['cc'],
                     "Bcc:",$row['bcc'],"Subject:",$row['email_subject'],"Body:",
                     $row['body'],"Time:",$row['time']);
